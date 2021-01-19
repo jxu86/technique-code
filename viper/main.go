@@ -10,15 +10,15 @@ import (
 const cmdRoot = "core"
 
 func main() {
-
+    fmt.Println("start...")
 	config := viper.New()
-	config.SetEnvPrefix(cmdRoot)
+    config.SetEnvPrefix(cmdRoot)
+    
     config.AutomaticEnv()
     replacer := strings.NewReplacer(".", "_")
     config.SetEnvKeyReplacer(replacer)
     config.SetConfigName(cmdRoot)
-    // config.AddConfigPath("./")
-
+    config.AddConfigPath("./")
     err := config.ReadInConfig()
     if err != nil {
         fmt.Println(fmt.Errorf("Fatal error when reading %s config file:%s", cmdRoot, err))

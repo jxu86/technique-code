@@ -5,6 +5,6 @@ statetransfer:
     timeout:
         singleblock: 2s
         singlestatedelta: 2s
-        fullstate: 60s
+        fullstate: 90s
 peer:
     abcd:   3322d
