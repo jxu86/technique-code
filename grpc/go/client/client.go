@@ -155,6 +155,7 @@ func main() {
 	log.Println("serverAddr:", *serverAddr)
 	var opts []grpc.DialOption
 	if *tls {
+		log.Println("tls enabled!")
 		if *caFile == "" {
 			*caFile = testdata.Path("ca.pem")
 		}
@@ -166,7 +167,7 @@ func main() {
 	} else {
 		opts = append(opts, grpc.WithInsecure())
 	}
-
+	log.Println("1")
 	opts = append(opts, grpc.WithBlock())
 	conn, err := grpc.Dial(*serverAddr, opts...)
 	if err != nil {
@@ -174,13 +175,13 @@ func main() {
 	}
 	defer conn.Close()
 	client := pb.NewRouteGuideClient(conn)
-
+	log.Println("2")
 	// Looking for a valid feature
 	printFeature(client, &pb.Point{Latitude: 409146138, Longitude: -746188906})
-
+	log.Println("3")
 	// Feature missing.
 	printFeature(client, &pb.Point{Latitude: 0, Longitude: 0})
-
+	log.Println("4")
 	// Looking for features between 40, -75 and 42, -73.
 	printFeatures(client, &pb.Rectangle{
 		Lo: &pb.Point{Latitude: 400000000, Longitude: -750000000},

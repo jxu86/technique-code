@@ -229,6 +229,7 @@ func main() {
 	log.Println("listen to ", *port)
 	var opts []grpc.ServerOption
 	if *tls {
+		log.Println("tls enabled!")
 		if *certFile == "" {
 			*certFile = testdata.Path("server1.pem")
 		}
